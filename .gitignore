@@ -1,0 +1,7 @@
+# Neovim
+*.swp
+*.swo
+*.tmp
+
+# Local/state
+.nvim/
