@@ -40,22 +40,12 @@ vim.opt.softtabstop = 2
 vim.opt.tabstop     = 2
 vim.opt.shiftwidth  = 2
 
---  vim.api.nvim_create_autocmd("FileType", {
---      pattern = { "c", "cpp", "h" },
---      callback = function()
---          vim.opt.tabstop = 2
---          vim.opt.shiftwidth = 2
---          vim.opt.softtabstop = 2
---      end,
---  })
-
--- Jai and Odin highlight as C
---    vim.filetype.add({
---      extension = {
---        jai = "c",
---        odin = "c",
---      },
---    })
+-- Highlighy jai the same way odin does.
+vim.filetype.add({
+  extension = {
+    jai = "odin",
+  },
+})
 
 -- GUI Font (Used in Neovide)
 vim.opt.guifont = "Jetbrains Mono :h15"
