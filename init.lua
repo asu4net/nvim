@@ -47,9 +47,6 @@ vim.filetype.add({
   },
 })
 
--- GUI Font (Used in Neovide)
-vim.opt.guifont = "Jetbrains Mono :h15"
-
 -- Highliht on Yank.
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
