@@ -28,7 +28,21 @@ vim.opt.signcolumn = "yes"
 vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
 
 -- Autocomplete
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+-- Ctrl + n: Next suggestion.
+-- Ctrl + p: Prev suggestion.
+-- Ctrl + y: Accept suggestion.
+
+vim.opt.completeopt = { 
+  "menu",    -- Shows a menu with suggestions.
+  "menuone", -- Shows the menu, even with one suggestion.
+  "noselect" -- Does not autoselect the first suggestion.
+}
+vim.opt.complete = { 
+  ".",       -- Words of the current file.
+  "w",       -- Words from other visible windows.
+  "b"        -- Words from loaded buffers.
+}
 
 -- Explorer / wildmenu
 vim.opt.compatible = false
