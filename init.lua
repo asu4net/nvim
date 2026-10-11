@@ -148,6 +148,19 @@ require("lazy").setup({
       end,
     },
     {
+      'MagicDuck/grug-far.nvim',
+      -- Note (lazy loading): grug-far.lua defers all it's requires so it's lazy by default
+      -- additional lazy config to defer loading is not really needed...
+      config = function()
+        -- optional setup call to override plugin options
+        -- alternatively you can set options with vim.g.grug_far = { ... }
+        require('grug-far').setup({
+          -- options, see Configuration section below
+          -- there are no required options atm
+        });
+      end
+    },
+    {
       "echasnovski/mini.pairs",
       event = "InsertEnter",
       version = false, -- Use last version.
@@ -167,6 +180,35 @@ require("lazy").setup({
           ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\].", register = { cr = false } },
         },
       },
+    },
+    {
+      "echasnovski/mini.comment",
+      version = false,
+      opts = {
+        mappings = {
+          comment = "gc",       -- Comment line in Normal mode, or selection in Visual mode.
+          comment_line = "gcc", -- Comment the current line.
+          comment_visual = "gc",-- Comment selection in Visual mode.
+          textobject = "gc",    -- Textobject for commenting.
+        },
+      },
+    },
+    {
+      "echasnovski/mini.surround",
+      version = false,
+      config = function()
+        require("mini.surround").setup({
+          mappings = {
+            add = "sa",            -- Add surrounding (e.g., saiw").
+            delete = "sd",         -- Delete surrounding (e.g., sd").
+            replace = "sr",        -- Replace surrounding (e.g., sr"{ ).
+            find = "sf",           -- Find right surrounding border.
+            find_left = "sF",      -- Find left surrounding border.
+            highlight = "sh",      -- Highlight surroundings.
+            update_n_lines = "sn", -- Configure how many lines to search.
+          },
+        })
+      end
     },
   },
   -- Other settings here.
