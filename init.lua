@@ -122,7 +122,8 @@ require("lazy").setup({
     },
     -- Lazy Telescope
     {
-      'nvim-telescope/telescope.nvim', version = '*',
+      'nvim-telescope/telescope.nvim', 
+      version = '*',
       dependencies = {
         'nvim-lua/plenary.nvim',
         -- optional but recommended
@@ -145,6 +146,27 @@ require("lazy").setup({
         vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
         vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
       end,
+    },
+    {
+      "echasnovski/mini.pairs",
+      event = "InsertEnter",
+      version = false, -- Use last version.
+      opts = {
+      modes = { insert = true, command = false, terminal = false },
+      mappings = {
+          ["("] = { action = "open", pair = "()", neigh_pattern = "[^\\]." },
+          ["["] = { action = "open", pair = "[]", neigh_pattern = "[^\\]." },
+          ["{"] = { action = "open", pair = "{}", neigh_pattern = "[^\\]." },
+
+          [")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
+          ["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
+          ["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
+
+          ['"'] = { action = "closeopen", pair = '""', neigh_pattern = "[^\\].", register = { cr = false } },
+          ["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%w\\].", register = { cr = false } },
+          ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\].", register = { cr = false } },
+        },
+      },
     },
   },
   -- Other settings here.
