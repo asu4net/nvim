@@ -133,6 +133,9 @@ require("lazy").setup({
           defaults = {
             file_ignore_patterns = {
               "%.png$",
+              "%.jpeg$",
+              "%.exe$",
+              "%.pdb$",
             },
           },
         })
