@@ -74,6 +74,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Use Esc to go normal mode in term mode
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 
+-- Neovide stuff
+local scale_factor = 1.15
+if vim.g.neovide then
+  vim.g.neovide_scale_factor = scale_factor
+    
+  vim.keymap.set({ "n", "v" }, "<C-+>", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1
+  end)
+
+  vim.keymap.set({ "n", "v" }, "<C-->", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1
+  end)
+
+  vim.keymap.set({ "n", "v" }, "<C-0>", function()
+    vim.g.neovide_scale_factor = scale_factor 
+  end)
+end
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
