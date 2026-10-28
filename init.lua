@@ -138,6 +138,64 @@ require("lazy").setup({
         })
       end,
     },
+    {
+      "mason-org/mason.nvim",
+      opts = {
+        registries = {
+          "github:mason-org/mason-registry",
+          "github:Crashdummyy/mason-registry",
+        },
+      },
+    },
+    {
+      "seblyng/roslyn.nvim",
+      ft = { "cs", "razor" },
+      opts = {},
+      init = function()
+        vim.lsp.config("roslyn", {
+          on_attach = function(client, bufnr)
+
+            local opts = { buffer = bufnr, silent = true }
+            -- Autocompletado del LSP (Neovim 0.11+)
+            vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+
+            -- Lanzar el menú a mano con Ctrl+Espacio
+            vim.keymap.set("i", "<C-Space>", function()
+                vim.lsp.completion.get()
+              end, { buffer = bufnr, desc = "Completion LSP" }
+            )
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition." }))
+            vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "Find references." }))
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Show docs." }))
+            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code actions." }))
+            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol." }))
+
+          end,
+          settings = {
+            ["csharp|background_analysis"] = {
+              dotnet_analyzer_diagnostics_scope = "openFiles",
+              dotnet_compiler_diagnostics_scope = "openFiles",
+            },
+            ["csharp|completion"] = {
+              dotnet_show_completion_items_from_unimported_namespaces = true,
+            },
+          },
+        })
+      end,
+    },
+    {
+      "stevearc/conform.nvim",
+      ft = "cs",
+      opts = {
+        formatters_by_ft = {
+          cs = { "csharpier" },
+        },
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_fallback = true,
+        },
+      },
+    },
     -- Lazy Telescope
     {
       'nvim-telescope/telescope.nvim', 
