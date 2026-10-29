@@ -50,9 +50,9 @@ vim.opt.wildmenu = true
 
 -- Tabs
 vim.opt.expandtab = true
-vim.opt.softtabstop = 2
-vim.opt.tabstop     = 2
-vim.opt.shiftwidth  = 2
+vim.opt.softtabstop = 4
+vim.opt.tabstop     = 4
+vim.opt.shiftwidth  = 4
 
 -- Highlighy jai the same way odin does.
 vim.filetype.add({
@@ -63,10 +63,12 @@ vim.filetype.add({
 
 -- Highliht on Yank.
 vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Highlight on Yank",
+  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
   callback = function()
     vim.highlight.on_yank({
-      higroup = "YankHighlight",
-      timeout = 180,
+      higroup = "YankHighlight", -- Use the Catpuccin Visual highlight
+      timeout = 200,
     })
   end,
 })
@@ -112,31 +114,36 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup Package Manager (Lazy)
 require("lazy").setup({
   spec = {
-    {
-      'RostislavArts/naysayer.nvim',
-      name = "naysayer",
-      priority = 1000,
-      config = function()
-        vim.cmd.colorscheme('naysayer')
-        -- Cursor color stuff:
-        -- Enable editing cursor color
-        vim.opt.termguicolors = true
-
-        -- highlight Normal
-        vim.api.nvim_set_hl(0, "Cursor",  { fg = "black", bg = "#88d890" })
-        -- highlight Insert
-        vim.api.nvim_set_hl(0, "Cursor2", { fg = "#88d890",   bg = "#88d890" })
-
-        -- apply styles
-        vim.opt.guicursor = "n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50"
-
-        -- yank color
-        vim.api.nvim_set_hl(0, "YankHighlight", {
-          bg = "#ffffff",
-          fg = "#000000",
-          bold = true,
-        })
-      end,
+    -- {
+    --   'RostislavArts/naysayer.nvim',
+    --   name = "naysayer",
+    --   priority = 1000,
+    --   config = function()
+    --     vim.cmd.colorscheme('naysayer')
+    --     -- Cursor color stuff:
+    --     -- Enable editing cursor color
+    --     vim.opt.termguicolors = true
+    --
+    --     -- highlight Normal
+    --     vim.api.nvim_set_hl(0, "Cursor",  { fg = "black", bg = "#88d890" })
+    --     -- highlight Insert
+    --     vim.api.nvim_set_hl(0, "Cursor2", { fg = "#88d890",   bg = "#88d890" })
+    --
+    --     -- apply styles
+    --     vim.opt.guicursor = "n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50"
+    --
+    --     -- yank color
+    --     vim.api.nvim_set_hl(0, "YankHighlight", {
+    --       bg = "#ffffff",
+    --       fg = "#000000",
+    --       bold = true,
+    --     })
+    --   end,
+    -- },
+    { 
+      "catppuccin/nvim", 
+      name = "catppuccin", 
+      priority = 1000 
     },
     {
       "mason-org/mason.nvim",
@@ -287,8 +294,85 @@ require("lazy").setup({
       end
     },
   },
-  -- Other settings here.
-  install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
+
+require("catppuccin").setup({
+    flavour = "macchiato", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+        light = "latte",
+        dark = "mocha",
+    },
+    transparent_background = false, -- disables setting the background color.
+    float = {
+        transparent = false, -- enable transparent floating windows
+        solid = false, -- use solid styling for floating windows, see |winborder|
+    },
+    term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+    dim_inactive = {
+        enabled = false, -- dims the background color of inactive window
+        shade = "dark",
+        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+    },
+    no_italic = false, -- Force no italic
+    no_bold = false, -- Force no bold
+    no_underline = false, -- Force no underline
+    styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { "italic" }, -- Change the style of comments
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = { "bold" },
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+        -- miscs = {}, -- Uncomment to turn off hard-coded styles
+    },
+    lsp_styles = { -- Handles the style of specific lsp hl groups (see `:h lsp-highlight`).
+        virtual_text = {
+            errors = { "italic" },
+            hints = { "italic" },
+            warnings = { "italic" },
+            information = { "italic" },
+            ok = { "italic" },
+        },
+        underlines = {
+            errors = { "underline" },
+            hints = { "underline" },
+            warnings = { "underline" },
+            information = { "underline" },
+            ok = { "underline" },
+        },
+        inlay_hints = {
+            background = true,
+        },
+    },
+    color_overrides = {},
+    custom_highlights = function(colors)
+        return {
+            -- Creamos un grupo que use el color verde de Catppuccin para el fondo (bg)
+            -- y el color de fondo base para las letras (fg), logrando un contraste alto.
+            YankHighlight = { bg = colors.green, fg = colors.base, bold = true },
+        }
+    end,
+    auto_integrations = true,
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        notify = false,
+        mini = {
+            enabled = true,
+            indentscope_color = "",
+        },
+        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+    },
+})
+
+-- setup must be called before loading
+vim.cmd.colorscheme "catppuccin-nvim"
