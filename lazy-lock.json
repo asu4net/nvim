@@ -8,7 +8,7 @@
   "mini.pairs": { "branch": "main", "commit": "03eb1f0062a2cee5314d1ac3939246e4bb21352e" },
   "mini.surround": { "branch": "main", "commit": "5357f00aca51a3b43e7775901b1ad9699f8c2678" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
-  "roslyn.nvim": { "branch": "main", "commit": "f0e15427ba4b4574aa90f5f5ae630e698606dcf8" },
+  "roslyn.nvim": { "branch": "main", "commit": "059c5791a19a00049736d02ad2855a346433cf54" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "b25b749b9db64d375d782094e2b9dce53ad53a40" },
   "telescope.nvim": { "branch": "master", "commit": "5255aa27c422de944791318024167ad5d40aad20" }
 }
