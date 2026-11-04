@@ -4,7 +4,7 @@ vim.g.maplocalleader = "\\"
 -- Remove the ~ ugly thing
 vim.opt.fillchars:append { eob = " " }
 
--- Colors
+-- Enables 24 bit colors for terminal emulator.
 vim.opt.termguicolors = true 
 
 -- Don't add newline at the end
@@ -21,7 +21,8 @@ vim.keymap.set("x", "p", '"_dP')
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
---vim.opt.numberwidth = 10
+-- This would add padding and stuff
+-- vim.opt.numberwidth = 10
 
 -- Relative line numbers in (netrw) with this spell
 vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
