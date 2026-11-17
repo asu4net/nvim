@@ -2,7 +2,7 @@
 --  tools that some plugins require to work.
 --  It is being used by roslyn:
 --      Note: It is required to call a mason command to install roslyn:
---      :MasonInstall roslyn
+--      :MasonInstall roslyn or :MasonInstallAll
 return 
 {
     "mason-org/mason.nvim",
@@ -13,5 +13,9 @@ return
             -- c#, so we have to add an extra registry.
             "github:Crashdummyy/mason-registry",
         },
+        ensure_installed = {
+            "clangd",
+            "roslyn",
+        }
     },
 }
