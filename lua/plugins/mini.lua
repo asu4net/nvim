@@ -1,7 +1,6 @@
 -- Nice quality of life pluggins.
 -- Auto-close braces.
 -- Comment shortcut.
--- @Review: Whatever surround does, I've not tried yet.
 return {
     {
         "echasnovski/mini.pairs",
@@ -35,22 +34,5 @@ return {
                 textobject = "gc",    -- Textobject for commenting.
             },
         },
-    },
-    {
-        "echasnovski/mini.surround",
-        version = false,
-        config = function()
-            require("mini.surround").setup({
-                mappings = {
-                    add = "sa",            -- Add surrounding (e.g., saiw").
-                    delete = "sd",         -- Delete surrounding (e.g., sd").
-                    replace = "sr",        -- Replace surrounding (e.g., sr"{ ).
-                    find = "sf",           -- Find right surrounding border.
-                    find_left = "sF",      -- Find left surrounding border.
-                    highlight = "sh",      -- Highlight surroundings.
-                    update_n_lines = "sn", -- Configure how many lines to search.
-                },
-            })
-        end
     },
 }

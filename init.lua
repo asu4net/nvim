@@ -1,9 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Remove the ~ ugly thing
-vim.opt.fillchars:append { eob = " " }
-
 -- Enables 24 bit colors for terminal emulator.
 vim.opt.termguicolors = true 
 
@@ -61,18 +58,6 @@ vim.filetype.add({
   },
 })
 
--- Highliht on Yank.
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight on Yank",
-  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank({
-      higroup = "YankHighlight", -- Use the Catpuccin Visual highlight
-      timeout = 200,
-    })
-  end,
-})
-
 -- Use Esc to go normal mode in term mode
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 
@@ -98,4 +83,7 @@ end
 require("config.lazy")
 
 -- Set the color scheme.
-vim.cmd.colorscheme("catppuccin-nvim")
+vim.cmd.colorscheme("catppuccin")
+-- vim.cmd.colorscheme("gruvbox")
+-- vim.cmd.colorscheme("sorbet")
+-- vim.cmd.colorscheme("quiet")
