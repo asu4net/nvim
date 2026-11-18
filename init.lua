@@ -1,5 +1,4 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
 
 -- Centered scrolling
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -67,39 +66,5 @@ end
 -- Load the plugins using Lazy.
 require("config.lazy")
 
--- Tweak some stuff with the theme.
-vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = "catppuccin*",
-  callback = function()
-    local italic_bold_groups = {
-      -- "Comment",
-      -- "SpecialComment",
-      "Keyword",
-      "Conditional",
-      "Repeat",
-      -- "@comment",
-      -- "@comment.documentation",
-      "@keyword",
-      "@keyword.function",
-      "@keyword.return",
-      "@keyword.operator",
-      "@keyword.conditional",
-      "@keyword.repeat",
-    }
-
-    for _, group in ipairs(italic_bold_groups) do
-      local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
-      if hl and next(hl) ~= nil then
-        hl.italic = true
-        hl.bold = true
-        vim.api.nvim_set_hl(0, group, hl)
-      end
-    end
-  end,
-})
-
 -- Set the color scheme.
-vim.cmd.colorscheme("catppuccin")
--- vim.cmd.colorscheme("gruvbox")
--- vim.cmd.colorscheme("sorbet")
--- vim.cmd.colorscheme("quiet")
+vim.cmd.colorscheme("retrobox")
