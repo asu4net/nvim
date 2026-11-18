@@ -1,12 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Enables 24 bit colors for terminal emulator.
-vim.opt.termguicolors = true 
-
--- Don't add newline at the end
-vim.opt.fixeol = false
-
 -- Centered scrolling
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -35,15 +29,6 @@ vim.opt.completeopt = {
   "menuone", -- Shows the menu, even with one suggestion.
   "noselect" -- Does not autoselect the first suggestion.
 }
-vim.opt.complete = { 
-  ".",       -- Words of the current file.
-  "w",       -- Words from other visible windows.
-  "b"        -- Words from loaded buffers.
-}
-
--- Explorer / wildmenu
-vim.opt.compatible = false
-vim.opt.wildmenu = true
 
 -- Tabs
 vim.opt.expandtab = true
@@ -59,7 +44,7 @@ vim.filetype.add({
 })
 
 -- Use Esc to go normal mode in term mode
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { silent = true })
 
 -- Neovide stuff
 local scale_factor = 1.15
@@ -81,6 +66,37 @@ end
 
 -- Load the plugins using Lazy.
 require("config.lazy")
+
+-- Tweak some stuff with the theme.
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "catppuccin*",
+  callback = function()
+    local italic_bold_groups = {
+      -- "Comment",
+      -- "SpecialComment",
+      "Keyword",
+      "Conditional",
+      "Repeat",
+      -- "@comment",
+      -- "@comment.documentation",
+      "@keyword",
+      "@keyword.function",
+      "@keyword.return",
+      "@keyword.operator",
+      "@keyword.conditional",
+      "@keyword.repeat",
+    }
+
+    for _, group in ipairs(italic_bold_groups) do
+      local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+      if hl and next(hl) ~= nil then
+        hl.italic = true
+        hl.bold = true
+        vim.api.nvim_set_hl(0, group, hl)
+      end
+    end
+  end,
+})
 
 -- Set the color scheme.
 vim.cmd.colorscheme("catppuccin")
