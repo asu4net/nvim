@@ -7,16 +7,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- Paste over selection
 vim.keymap.set("x", "p", '"_dP')
 
--- Relative line numbers
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.signcolumn = "yes"
--- This would add padding and stuff
--- vim.opt.numberwidth = 10
-
--- Relative line numbers in (netrw) with this spell
-vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
-
 -- Autocomplete
 
 -- Ctrl + n: Next suggestion.
